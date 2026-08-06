@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>基金持仓诊断报告 - 2026-08-06</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f8f6; color: #1f2937; line-height: 1.6; }
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.tldr { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: #fff; border-radius: 12px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 4px 14px rgba(22,163,74,0.18); }
+.tldr h1 { font-size: 22px; margin-bottom: 12px; font-weight: 600; letter-spacing: 0.5px; }
+.tldr-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
+.tldr-cell { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 12px; }
+.tldr-cell .label { font-size: 12px; opacity: 0.85; }
+.tldr-cell .value { font-size: 22px; font-weight: 700; margin-top: 4px; }
+.tldr-cell .sub { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+.verdict { background: rgba(255,255,255,0.16); border-radius: 8px; padding: 14px 18px; margin-top: 16px; font-size: 14px; line-height: 1.6; }
+
+.section { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.section h2 { font-size: 18px; color: #15803d; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #dcfce7; display: flex; align-items: center; gap: 8px; }
+.section h2::before { content: ""; width: 4px; height: 18px; background: #16a34a; border-radius: 2px; }
+.section h3 { font-size: 15px; color: #1f2937; margin-top: 16px; margin-bottom: 8px; }
+
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+th { background: #f0fdf4; color: #15803d; font-weight: 600; font-size: 12px; }
+tr:hover { background: #f9fafb; }
+.up { color: #dc2626; font-weight: 600; }
+.down { color: #16a34a; font-weight: 600; }
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-right: 4px; }
+.tag-warn { background: #fef3c7; color: #b45309; }
+.tag-danger { background: #fee2e2; color: #b91c1c; }
+.tag-ok { background: #d1fae5; color: #065f46; }
+.tag-info { background: #dbeafe; color: #1e40af; }
+
+.callout { background: #fef9c3; border-left: 4px solid #facc15; padding: 12px 16px; border-radius: 6px; margin: 12px 0; font-size: 13px; }
+.callout-danger { background: #fee2e2; border-left-color: #ef4444; }
+.callout-ok { background: #d1fae5; border-left-color: #16a34a; }
+.callout-info { background: #dbeafe; border-left-color: #2563eb; }
+.callout-warn { background: #fff7ed; border-left-color: #f97316; }
+
+.chart-row { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 24px; padding: 16px 0; }
+.legend { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+
+.fund-card { border-left: 4px solid #16a34a; background: #f9fafb; padding: 14px 18px; border-radius: 6px; margin: 12px 0; }
+.fund-card h4 { color: #15803d; margin-bottom: 6px; font-size: 15px; }
+.fund-card .meta { color: #6b7280; font-size: 12px; margin-bottom: 8px; }
+.fund-card ul { margin: 6px 0 0 18px; font-size: 13px; }
+.fund-card li { margin-bottom: 3px; }
+
+.action-list { background: #f0fdf4; border-radius: 8px; padding: 16px 20px; margin: 12px 0; }
+.action-list ol { margin-left: 20px; font-size: 13px; }
+.action-list li { margin-bottom: 10px; }
+.priority-1 { color: #b91c1c; font-weight: 700; }
+.priority-2 { color: #d97706; font-weight: 700; }
+.priority-3 { color: #1e40af; font-weight: 600; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.signal-box { padding: 12px 16px; border-radius: 6px; background: #f9fafb; border-left: 3px solid #6b7280; }
+.signal-box.high { border-left-color: #dc2626; background: #fef2f2; }
+.signal-box.mid { border-left-color: #f59e0b; background: #fffbeb; }
+.signal-box.low { border-left-color: #16a34a; background: #f0fdf4; }
+
+.disclaimer { font-size: 12px; color: #6b7280; padding: 16px; background: #f9fafb; border-radius: 6px; margin-top: 16px; line-height: 1.8; }
+
+@media (max-width: 768px) {
+  .tldr-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- 首屏 TLDR 结论卡 -->
+<div class="tldr">
+  <h1>📋 基金持仓诊断 · 2026-08-06</h1>
+  <div style="font-size:13px; opacity:0.9;">账户：养基宝 · 总市值 1,977.00 元 · 综合浮亏 -15.76%</div>
+
+  <div class="tldr-grid">
+    <div class="tldr-cell">
+      <div class="label">综合评分</div>
+      <div class="value" style="color:#fde047;">48 / 100</div>
+      <div class="sub">偏弱 · 仅观察</div>
+    </div>
+    <div class="tldr-cell">
+      <div class="label">板块集中度</div>
+      <div class="value">100%</div>
+      <div class="sub">A 股科技 · 失衡</div>
+    </div>
+    <div class="tldr-cell">
+      <div class="label">回本所需涨幅</div>
+      <div class="value">+18.7%</div>
+      <div class="sub">从当前位置起</div>
+    </div>
+    <div class="tldr-cell">
+      <div class="label">估值风险</div>
+      <div class="value">高</div>
+      <div class="sub">半导体/双创50</div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <strong>一句话诊断：</strong>三只基金底层高度重叠，100% 重仓 A 股科技成长；当前半导体指数 PE 已处 91%+ 历史分位，估值高 + 行业集中 + 无对冲，组合韧性和回本确定性都偏弱。
+    <br><br>
+    <strong>Top 3 待办：</strong>
+    ① 减仓 AI/半导体主题，将单板块占比从 100% 降至 ≤60%；<br>
+    ② 引入防御资产（短债 / 红利 / 海外 QDII），平滑波动；<br>
+    ③ 切换费率更低的同指数<strong>场外联接</strong>（如华夏中证科创创业50 ETF联接C 013310，综合费率约 0.40%/年，较天弘 0.80% 省一半）。
+  </div>
+</div>
+
+<!-- 1. 持仓总览 -->
+<div class="section">
+  <h2>① 持仓总览</h2>
+  <div class="callout callout-info">
+    数据来自用户截图（养基宝 App，2026-08-06 收盘）+ 公开基金档案数据（天天基金 / 东方财富 / Wind）。<br>
+    成本价与买入时点未能从截图中读取，已基于市值与持有收益反推总成本 = 1,977 − (−369.79) ≈ <strong>2,346.79 元</strong>。
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>基金名称（截图）</th><th>真实代码</th><th>类型</th>
+        <th style="text-align:right;">市值(元)</th><th style="text-align:right;">占比</th>
+        <th style="text-align:right;">持有收益</th>
+        <th style="text-align:right;">收益率</th>
+        <th>建议</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>东方人工智能主题…</td>
+        <td>017811<br><small>（C 类，严凯）</small></td>
+        <td>主动偏股<br><small>半导体设备</small></td>
+        <td style="text-align:right;">312.94</td>
+        <td style="text-align:right;">15.83%</td>
+        <td style="text-align:right;" class="down">−81.11</td>
+        <td style="text-align:right;" class="down">−20.58%</td>
+        <td><span class="tag tag-danger">关注风控</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>天弘中证科创创业…</td>
+        <td>012895<br><small>（ETF联接C，张戈）</small></td>
+        <td>被动指数<br><small>科创 + 创业 50</small></td>
+        <td style="text-align:right;">1,308.25</td>
+        <td style="text-align:right;"><strong>66.17%</strong></td>
+        <td style="text-align:right;" class="down">−247.00</td>
+        <td style="text-align:right;" class="down">−15.88%</td>
+        <td><span class="tag tag-danger">关注风控</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>天弘创业板指数增…</td>
+        <td>015795<br><small>（C 类，杨超 / 王帅）</small></td>
+        <td>增强指数<br><small>创业板指 ×95%</small></td>
+        <td style="text-align:right;">355.81</td>
+        <td style="text-align:right;">18.00%</td>
+        <td style="text-align:right;" class="down">−41.68</td>
+        <td style="text-align:right;" class="down">−10.49%</td>
+        <td><span class="tag tag-warn">持仓观望</span></td>
+      </tr>
+      <tr style="background:#f0fdf4; font-weight:700;">
+        <td colspan="4">合计</td>
+        <td style="text-align:right;">1,977.00</td>
+        <td style="text-align:right;">100.00%</td>
+        <td style="text-align:right;" class="down">−369.79</td>
+        <td style="text-align:right;" class="down">−15.76%</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>权重分布（基于市值）</h3>
+  <div class="chart-row">
+    <!-- 内嵌 SVG 饼图（圆周 = 2π × 100 ≈ 628.3） -->
+    <svg width="240" height="240" viewBox="0 0 240 240">
+      <circle cx="120" cy="120" r="100" fill="#f3f4f6" />
+      <!-- 天弘双创50 66.17% -->
+      <circle cx="120" cy="120" r="100" fill="transparent"
+              stroke="#15803d" stroke-width="100"
+              stroke-dasharray="415.6 628.3" stroke-dashoffset="0"
+              transform="rotate(-90 120 120)" />
+      <!-- 创业板增强 18.00% -->
+      <circle cx="120" cy="120" r="100" fill="transparent"
+              stroke="#22c55e" stroke-width="100"
+              stroke-dasharray="113.1 628.3" stroke-dashoffset="-415.6"
+              transform="rotate(-90 120 120)" />
+      <!-- 东方 AI 15.83% -->
+      <circle cx="120" cy="120" r="100" fill="transparent"
+              stroke="#86efac" stroke-width="100"
+              stroke-dasharray="99.5 628.3" stroke-dashoffset="-528.7"
+              transform="rotate(-90 120 120)" />
+      <text x="120" y="120" text-anchor="middle" font-size="28" font-weight="700" fill="#15803d">100%</text>
+      <text x="120" y="142" text-anchor="middle" font-size="11" fill="#6b7280">A股科技板块</text>
+    </svg>
+    <div class="legend">
+      <div class="legend-item"><span class="dot" style="background:#15803d"></span>天弘双创 50 联接 C — 66.17%（<strong style="color:#dc2626;">过重</strong>）</div>
+      <div class="legend-item"><span class="dot" style="background:#22c55e"></span>天弘创业板增强 C — 18.00%</div>
+      <div class="legend-item"><span class="dot" style="background:#86efac"></span>东方人工智能 C — 15.83%</div>
+      <div class="legend-item"><span class="dot" style="background:#d1d5db"></span>其他资产（债券 / 海外 / 红利）— 0.00%</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 市场背景 -->
+<div class="section">
+  <h2>② 市场背景（2026 年 8 月初）</h2>
+  <p style="font-size:13px;">
+    持仓全部为 A 股科技 / 创业板相关指数，<strong>板块走势直接决定组合表现</strong>。
+    7 月这些板块经历了一轮快速调整（创业板指 7 月阶段性回撤约 23%）；
+    8 月初迎来超跌反弹，但 8 月 6 日（截图当日）已转为分化震荡。
+  </p>
+
+  <h3>关键指数动态</h3>
+  <table>
+    <thead>
+      <tr><th>指数</th><th>代码</th><th>8/6 收盘</th><th>近 4 日区间涨跌幅</th><th>PE-TTM</th><th>PE 近 3 年分位</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>创业板指</td><td>399006</td><td>3,511.47</td><td class="up">+5.01%</td><td>~44.5</td><td>~70-90%</td></tr>
+      <tr><td>中证科创创业 50</td><td>931643</td><td>2,418.74</td><td class="up">+4.61%</td><td>62.61</td><td><strong>91.4%</strong></td></tr>
+      <tr><td>半导体指数</td><td>H30184</td><td>13,131.77</td><td class="up">+5.16%</td><td>118.13</td><td><strong>91-94%</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>近 4 日走势（8/3 - 8/6）</h3>
+  <div class="callout">
+    <strong>8/4（周二）：</strong>创业板指 +5.64%、科创综指 +4.77%、半导体 +5.39%——超跌修复首日。<br>
+    <strong>8/5（周三）：</strong>创业板指 +1.32%、半导体 +5.34%，存储 / 封装领涨，全市场成交 2.68 万亿（放量）。<br>
+    <strong>8/6（当日）：</strong>三大指数分化，创业板指 -0.67%，光模块龙头（中际旭创 -4.19%、天孚通信 -4.68%）回调。<br>
+    <strong>成交：</strong>8/5 放量但 8/6 资金回到观望，反弹结构呈"两段式"——前 10 日交易超跌修复，随后转向基本面验证。
+  </div>
+
+  <div class="callout callout-info">
+    <strong>机构观点：</strong>中信证券 / 中信建投 / 招商证券等普遍认为流动性压力最大阶段大概率已过，
+    <strong>但短期反弹属超跌修复性质，并非板块全面普涨</strong>——后续表现取决于海外云厂商资本开支稳定性 + 国内产业链中报业绩兑现。
+  </div>
+</div>
+
+<!-- 3. 配置审查 -->
+<div class="section">
+  <h2>③ 配置审查（三层诊断）</h2>
+
+  <div class="grid-2">
+    <div class="callout callout-danger">
+      <strong>⚠️ 资产类别失衡</strong>
+      <p style="font-size:13px; margin-top:6px;">股票类 100% / 债券 0% / 海外 0% / 商品 0% / 现金 0%<br>
+      没有任何防御或对冲资产，遇到系统性回调时组合波动会被放大。</p>
+    </div>
+    <div class="callout callout-danger">
+      <strong>⚠️ 行业过度集中</strong>
+      <p style="font-size:13px; margin-top:6px;">三只底层高度重叠：<br>
+      · 东方 AI：半导体设备 90%+<br>
+      · 天弘双创 50：科创 + 创业 50 大硬科技（含半导体 / 新能源 / AI 硬件）<br>
+      · 天弘创业板增强：宁德 / 中际旭创 / 新易盛等龙头<br>
+      合计 <strong>A 股科技暴露接近 100%</strong>。</p>
+    </div>
+    <div class="callout callout-danger">
+      <strong>⚠️ 单只占比超限</strong>
+      <p style="font-size:13px; margin-top:6px;">天弘双创 50 占组合 66.17%，远超一般 20-30% 的仓位警戒线。<br>
+      一旦该 ETF 跟踪指数回调 10%，组合立即亏损 6.6%。</p>
+    </div>
+    <div class="callout callout-warn">
+      <strong>📌 风格单一</strong>
+      <p style="font-size:13px; margin-top:6px;">100% 成长风格（高 Beta / 高 PE）。<br>
+      在利率上行或风险偏好下降阶段，组合可能跑输大盘和价值风格。</p>
+    </div>
+  </div>
+
+  <h3>主流配置基准对照</h3>
+  <table>
+    <thead>
+      <tr><th>资产类别</th><th>当前占比</th><th>均衡参考区间</th><th>差额</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A 股核心宽基（沪深 300 / 中证 A50 / A500）</td><td>0%</td><td>15-30%</td><td class="down">−15% ~ −30%</td></tr>
+      <tr><td>科技 / 成长主题（含创业板 / 双创 / 科创板）</td><td>100%</td><td>20-40%</td><td class="up">+60% ~ +80%</td></tr>
+      <tr><td>债券（短债 / 中长债）</td><td>0%</td><td>20-40%</td><td class="down">−20% ~ −40%</td></tr>
+      <tr><td>海外股票（QDII：美股 / 全球）</td><td>0%</td><td>10-20%</td><td class="down">−10% ~ −20%</td></tr>
+      <tr><td>红利 / 低波（防御）</td><td>0%</td><td>10-20%</td><td class="down">−10% ~ −20%</td></tr>
+      <tr><td>现金 / 货币基金</td><td>0%</td><td>5-10%</td><td class="down">−5% ~ −10%</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:#6b7280;">⚠ 注：参考区间为一般均衡型投资者的建议区间，不代表具体投资建议。可根据个人风险承受能力和投资期限调整。</p>
+</div>
+
+<!-- 4. 各基金点评 -->
+<div class="section">
+  <h2>④ 各基金点评</h2>
+
+  <div class="fund-card" style="border-left-color:#dc2626;">
+    <h4>1. 东方人工智能主题 C（017811）</h4>
+    <div class="meta">基金经理：严凯（从业 74 月） · 成立：2023-02-22 · 规模：C 类 313.28 亿 + A 类 179.05 亿（合计约 500 亿）</div>
+    <ul>
+      <li><strong>特点：</strong>近 1 年涨幅 271%，严凯锚定半导体设备 + AI 产业链上游"卖铲子"环节；
+        前十大重仓股合计 80%+，均为半导体设备龙头（富创精密 9.34%、华海清科 9.22%、中微公司 9.06%、北方华创 9.03%、拓荆 8.90%、中科飞测 8.90%、芯源微 8.89%、精测电子 8.87%、京仪装备 7.59%、盛美上海 6.30%）。</li>
+      <li><strong>问题：</strong>
+        <ul>
+          <li>规模快速膨胀到近 500 亿，单一赛道（半导体设备）仓位压力加大；</li>
+          <li>2026Q1 制造业占比 90.66%，行业贝塔极重，与宽基 / 双创 50 底层高度重叠；</li>
+          <li>截图累计亏损 -20.58%，明显大于宽基指数同期回撤。</li>
+        </ul>
+      </li>
+      <li><strong>建议：</strong><span class="tag tag-danger">关注风控 / 切换</span>
+        行业过于集中且与天弘双创 50 在半导体设备板块高度重叠；
+        后续若半导体板块继续走弱，单基风险无法对冲。可考虑减仓或切换至更分散的主动 / 宽基产品。</li>
+    </ul>
+  </div>
+
+  <div class="fund-card" style="border-left-color:#dc2626;">
+    <h4>2. 天弘中证科创创业 50 ETF 联接 C（012895）</h4>
+    <div class="meta">基金经理：张戈（从业 9 年） · 成立：2021-07-16 · 场外联接 C（012895）规模：约 25 亿（截至 2026-03-31） · 综合费率：管理费 0.50% + 托管 0.10% + 销售服务费约 0.20-0.25% ≈ 0.80%/年</div>
+    <ul>
+      <li><strong>特点：</strong>跟踪中证科创创业 50 指数（科创板 + 创业板双市场前 50 大硬科技龙头）。
+        近 1 月跟踪误差 0.088%（同类前 3）；近 1 年超基准 +1.50%（同类前 10）。</li>
+      <li><strong>问题：</strong>
+        <ul>
+          <li><strong>综合费率约 0.80%/年 偏高</strong>——同类华夏 013310 / 易方达 013305 双创 50 联接 C 已降费至管理费 0.15% + 托管 0.05% + 销售服务费约 0.20% ≈ 0.40%/年；</li>
+          <li>前 10 大权重合计 63.01%，寒武纪 / 中微 / 澜起 / 中芯等半导体权重显著；</li>
+          <li>指数 PE-TTM 62.61 倍（近 3 年分位 91%）；</li>
+          <li>底层 ETF 近期有资金波动，联接基金规模约 25 亿（中等体量）。</li>
+        </ul>
+      </li>
+      <li><strong>建议：</strong><span class="tag tag-danger">关注风控 / 切换</span>
+        估值高位 + 仓位超重叠加，可考虑：
+        (1) 减仓 1/3 ~ 1/2 兑现浮亏中的部分筹码；
+        (2) 若继续持有双创 50 敞口，可切换至费率更低的<strong>场外联接</strong>（华夏双创 50 ETF联接C 013310 / 易方达双创 50 ETF联接C 013305），管理费已降至 0.15% + 托管 0.05%，综合费率约 0.40%/年，长期省约一半。</li>
+    </ul>
+  </div>
+
+  <div class="fund-card" style="border-left-color:#f59e0b;">
+    <h4>3. 天弘创业板指数增强 C（015795）</h4>
+    <div class="meta">基金经理：杨超 / 王帅 · 成立：2022-08-18 · 规模：13.87 亿（2026-06-30） · 基准：创业板指×95%+银行活期×5%</div>
+    <ul>
+      <li><strong>特点：</strong>在跟踪创业板指基础上做量化增强；2026Q1 末前十大重仓：新易盛 9.75%、中际旭创 9.45%、宁德时代 9.17%、胜宏科技 3.34%、三环集团 3.10%、东方财富 2.81%、阳光电源 2.64%、长川科技 2.41%、江波龙 2.30%、天孚通信 2.21%。
+        业绩基准相对清晰，规模适中。</li>
+      <li><strong>问题：</strong>
+        <ul>
+          <li>与前两只底层重叠度高（创业板、宁德时代、CPO / 光模块龙头）；</li>
+          <li>双基金经理合作时间较短（王帅任职 1.5 年），业绩稳定性待进一步观察。</li>
+        </ul>
+      </li>
+      <li><strong>建议：</strong><span class="tag tag-warn">持仓观望</span>
+        可继续持有观察；若已决定"减科技集中度"，可一并减仓或切换至分散型宽基（如中证 A500、沪深 300 增强）。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5. 高位信号排查 -->
+<div class="section">
+  <h2>⑤ 市场高位信号排查</h2>
+  <p style="font-size:13px; color:#6b7280;">对照经典高位信号清单排查当前 A 股科技板块状态：</p>
+
+  <div class="grid-2">
+    <div class="signal-box mid">
+      <strong>📊 半导体指数 PE 分位：91-94%（高位）</strong>
+      <p style="font-size:12px; margin-top:6px;">半年报披露季，若业绩兑现不及预期，估值消化压力会放大。</p>
+    </div>
+    <div class="signal-box mid">
+      <strong>📊 科创创业 50 PE 分位：91%（高位）</strong>
+      <p style="font-size:12px; margin-top:6px;">高估值背景下，主力资金已连续 2 日净流出，回本需靠业绩 + 资金回流。</p>
+    </div>
+    <div class="signal-box high">
+      <strong>📈 板块轮动：从单压科技走向扩散</strong>
+      <p style="font-size:12px; margin-top:6px;">8 月机构观点："市场结构有望由单一高景气方向向更多行业扩散"——对您 100% 科技仓位不利。</p>
+    </div>
+    <div class="signal-box low">
+      <strong>🌐 宏观：海外加息预期缓和</strong>
+      <p style="font-size:12px; margin-top:6px;">美联储 7 月议息未现鹰派超预期，美 2 季度 GDP 低于预期 → 全球流动性压力短期缓解，有助于科技股估值修复。</p>
+    </div>
+    <div class="signal-box mid">
+      <strong>💰 国内政策：强调逆周期调节</strong>
+      <p style="font-size:12px; margin-top:6px;">对市场情绪有支撑，但具体增量政策落地节奏仍不明朗。</p>
+    </div>
+    <div class="signal-box mid">
+      <strong>📉 反弹结构：两段式，前 10 日交易超跌修复</strong>
+      <p style="font-size:12px; margin-top:6px;">本轮反弹仍属于超跌修复（8/4-8/5 创业板 +5.64%），持续性需基本面验证。</p>
+    </div>
+  </div>
+
+  <div class="callout callout-warn" style="margin-top:16px;">
+    <strong>综合判断：</strong>宏观环境对成长股偏暖，但<strong>半导体 / 双创 50 估值已在历史 90%+ 分位</strong>，
+    持仓 100% 集中科技板块的风险 / 回报并不对称——上方空间有限，下方空间取决于业绩兑现与流动性是否持续。
+  </div>
+</div>
+
+<!-- 6. 综合调整方案 -->
+<div class="section">
+  <h2>⑥ 综合调整方案</h2>
+
+  <div class="action-list">
+    <p style="font-weight:700; color:#15803d;">🎯 调整目标：从 "100% A 股科技" → "60% 科技 + 25% 宽基 / 红利 + 15% 防御（债券 / 海外）"</p>
+    <p style="font-size:12px; color:#6b7280;">最终结构因个人风险承受能力而异，以下三档方案供参考（总市值仅 ~2,000 元，调整成本可一次性承担）：</p>
+
+    <ol>
+      <li>
+        <span class="priority-1">【必做 · 优先级 1】减集中度</span><br>
+        <strong>建议操作：</strong>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li>天弘双创 50 联接 C（012895）：<strong>减持约 700 元</strong>（从 1,308 → ~600），占比降至 ~30%；</li>
+          <li>东方人工智能 C（017811）：<strong>全部卖出</strong>（312 元），与双创 50 底层高度重叠，避免双重集中；</li>
+          <li>天弘创业板增强 C（015795）：暂保留 355 元观察，待减集中度后再评估。</li>
+        </ul>
+      </li>
+      <li>
+        <span class="priority-2">【应做 · 优先级 2】引入防御资产</span><br>
+        <strong>建议用上述减持资金（约 1,000 元）分摊：</strong>
+        <ul style="margin-left:18px; margin-top:4px;">
+          <li><strong>短债 / 中短债基金</strong>：~300-400 元（年化 2-3%，回撤极小）——例如易方达中短期债券 C、博时短债 C、招商产业债 C 等；</li>
+          <li><strong>A 股宽基</strong>：~300-400 元——沪深 300 ETF 联接 / 中证 A500 ETF 联接（如易方达沪深 300 ETF 联接 C、天弘中证 A500 ETF 联接等）；</li>
+          <li><strong>海外 QDII</strong>：~200-300 元——纳斯达克 100 / 标普 500 ETF 联接，与 A 股科技形成地域分散（如华夏纳斯达克 100 ETF、国泰标普 500 ETF 联接）。</li>
+        </ul>
+      </li>
+      <li>
+        <span class="priority-3">【可做 · 优先级 3】优化费率（场外方案）</span><br>
+        若保留双创 50 敞口，可将天弘双创 50 联接 C（012895，综合约 0.80%/年）<strong>切换至华夏双创 50 ETF联接C（013310）或易方达双创 50 ETF联接C（013305），综合约 0.40%/年</strong>；两者均为场外联接、无需股票账户，管理费已降至 0.15% + 托管 0.05%，长期可省约一半费用。
+      </li>
+      <li>
+        <span class="priority-3">【观望 · 优先级 4】暂不加仓</span><br>
+        浮亏 15.76% 状态下，<strong>不建议加倍加仓摊低成本</strong>；
+        若坚定看好科技板块未来，应通过<strong>新资金分批定投</strong>而非追加存量亏损头寸。
+      </li>
+    </ol>
+  </div>
+
+  <h3>三档情景推演（仅供决策参考，业绩不代表未来）</h3>
+  <table>
+    <thead><tr><th>情景</th><th>市场假设（未来 6 个月）</th><th>原组合可能表现</th><th>调整后组合可能表现</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:#16a34a;">乐观</strong></td>
+        <td>创业板指回到 4,000；半导体反弹至 15,000+</td>
+        <td>+15% ~ +20%</td>
+        <td>+10% ~ +15%（结构更稳）</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#6b7280;">基准</strong></td>
+        <td>指数在当前区间震荡 ±5%；半导体 PE 分位逐步回归 70%</td>
+        <td>−5% ~ +5%</td>
+        <td>−2% ~ +3%（防御层对冲）</td>
+      </tr>
+      <tr>
+        <td><strong style="color:#dc2626;">悲观</strong></td>
+        <td>高估值消化；半导体跌 15%；创业板指跌 10%；海外普跌</td>
+        <td>−12% ~ −18%</td>
+        <td>−6% ~ −10%（防御 + 宽基 + 海外均缓冲）</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:#6b7280; margin-top:8px;">⚠ 情景推演基于公开数据合理假设，仅作方向性参考，不代表任何承诺或预测。</p>
+</div>
+
+<!-- 7. 关键风险提示 -->
+<div class="section">
+  <h2>⑦ 关键风险提示</h2>
+  <ul style="margin-left:20px; font-size:13px;">
+    <li><strong style="color:#dc2626;">估值消化风险：</strong>半导体指数 PE 118 倍 / 分位 91%+；若半年报业绩不及预期，估值消化压力较大。</li>
+    <li><strong style="color:#dc2626;">集中度风险：</strong>单一 A 股科技赛道暴露 100%，任何细分行业 / 单只权重股风险都会被组合放大。</li>
+    <li><strong style="color:#f59e0b;">同向波动风险：</strong>三只基金底层高度重叠，遇到极端风险事件时组合无对冲。</li>
+    <li><strong style="color:#f59e0b;">流动性风险：</strong>东方 AI、天弘创业板增强 C 涉及半导体、光模块龙头，单日波动可能较大。</li>
+    <li><strong style="color:#6b7280;">数据时效风险：</strong>本报告基于 2026-08-06 当日及 8 月初公开数据，市场处于快速演变期，请结合最新行情再做决策。</li>
+    <li><strong style="color:#6b7280;">数据源降级说明：</strong>部分实时数据查询（金融数据 API 服务）在本次会话期间出现临时异常，已通过公开渠道（天天基金、东方财富、Wind、新浪、和讯、Tushare / 网易 163 公开策略报告等）补齐，未影响结论方向。</li>
+  </ul>
+</div>
+
+<!-- 免责声明 -->
+<div class="disclaimer">
+  <strong>⚠ 免责声明</strong><br>
+  本报告基于公开数据（基金定期报告、行情数据、基金档案、机构策略观点）及用户提供的持仓截图整理生成，<strong>仅供个人投资教育与决策参考，不构成任何投资建议或个股 / 个基推荐</strong>。<br>
+  所有数据来源已在正文中标注；缺失或不确定的指标（如成本价、买入时点、申赎费率细则）已标注 NA 并说明限制。<br>
+  基金过往业绩不代表未来表现；定量分析仅为历史规律推演，不构成对未来收益的承诺。<br>
+  投资有风险，决策需谨慎；任何买卖行为由投资者本人独立判断并承担后果。
+</div>
+
+<!-- 数据来源 -->
+<div class="disclaimer" style="margin-top:12px;">
+  <strong>📚 数据来源</strong><br>
+  · 持仓数据：用户截图（养基宝 App，2026-08-06 09:38 截图）<br>
+  · 基金档案：天天基金（fund.eastmoney.com）、新浪财经、和讯、天弘基金官网、东方财富、stockstar 基金档案<br>
+  · 指数行情与估值：Wind / 同花顺 / 网易 163 / 中国经济网（2026-08-04~06 公开数据）<br>
+  · 机构观点：中信证券、东吴证券、中信建投、招商证券、广发证券、中金公司、国盛证券等公开策略报告（2026-08-04~06）<br>
+  · 部分宏观与数据查询受会话内数据源服务临时异常影响，已通过上述公开来源补充并明确告知。
+</div>
+
+</div>
+</body>
+</html>

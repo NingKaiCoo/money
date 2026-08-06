@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资金规模建议 + 策略复检（2026-08-06）</title>
+<style>
+  :root{
+    --bg:#f0fdf4; --card:#ffffff; --ink:#14532d; --ink2:#166534;
+    --line:#bbf7d0; --accent:#16a34a; --danger:#dc2626; --warn:#d97706;
+    --blue:#1d4ed8; --gold:#ca8a04; --purple:#7c3aed;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;padding:28px;}
+  .wrap{max-width:980px;margin:0 auto;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--ink2);}
+  .sub{color:#15803d;font-size:14px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;margin:16px 0;box-shadow:0 1px 3px rgba(22,163,74,.08);}
+  h2{font-size:18px;margin:0 0 12px;color:var(--ink2);border-left:5px solid var(--accent);padding-left:10px;}
+  h3{font-size:15px;margin:14px 0 6px;color:var(--ink2);}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+  th{background:#dcfce7;color:var(--ink2);font-weight:600;}
+  tr:nth-child(even) td{background:#f7feee;}
+  .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;}
+  .tag-buy{background:#dcfce7;color:#15803d;}
+  .tag-hold{background:#fef9c3;color:#a16207;}
+  .tag-sell{background:#fee2e2;color:#b91c1c;}
+  .k{color:var(--danger);font-weight:700;}
+  .ok{color:var(--accent);font-weight:700;}
+  .gold{color:var(--gold);font-weight:700;}
+  .pb{background:#ecfdf5;border-left:4px solid var(--accent);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warnbox{background:#fffbeb;border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .dangerbox{background:#fef2f2;border-left:4px solid var(--danger);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-size:12.5px;}
+  .small{font-size:12px;color:#64748b;}
+  ul{margin:8px 0;padding-left:20px;} li{margin:4px 0;}
+  .pill{display:inline-block;background:#16a34a;color:#fff;border-radius:8px;padding:4px 12px;font-size:13px;font-weight:600;}
+  .toprule{background:#14532d;color:#fff;border-radius:12px;padding:16px 18px;margin:14px 0;font-size:15px;line-height:1.7;}
+  .big{font-size:30px;font-weight:800;color:var(--accent);text-align:center;padding:6px 0;}
+  .reco{background:#064e3b;color:#fff;border-radius:12px;padding:18px;margin:14px 0;text-align:center;}
+  .reco b{font-size:22px;color:#86efac;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>资金规模建议 + 策略复检（2026-08-06）</h1>
+  <div class="sub">回应你的两个问题：① 新增多少资金回本最快概率最大；② 策略是否有问题、要补什么。已把"短债你已有大量持仓、本策略不再新购"贯彻到手册 v2。</div>
+
+  <div class="toprule">
+    <strong>最高原则（再次确认，凌驾一切）：这是你真实的钱。</strong> 每个决策同时看多空、交叉验证 ≥2 源、想清"错了最大亏多少"。策略可以激进，但<strong>本金安全永远优先于回本速度</strong>。
+  </div>
+
+  <!-- 一、资金给多少 -->
+  <div class="card">
+    <h2>一、新增多少资金，回本最快概率最大？</h2>
+    <p>先算清"回本线"的数学关系（基于你现有盘：当前市值约 <strong>1,978 元</strong>，浮亏 <strong>−15.76%</strong> → 成本约 <strong>2,348 元</strong>，<strong>亏约 370 元</strong>）。</p>
+    <div class="pb">回本所需"整体涨幅" = 亏损额 ÷（当前市值 + 新增资金）= <code>370 ÷ (1978 + N)</code>。一次性新增越多，回本线越低；但新增资金本身也是成本，若科技继续跌，绝对亏损会放大。</div>
+    <table>
+      <tr><th>新增资金 N</th><th>回本所需总涨幅</th><th>对比"不新增"</th><th>风险评价</th></tr>
+      <tr><td>0（不投）</td><td>+18.7%</td><td>基准</td><td>回本慢，但风险最低</td></tr>
+      <tr><td>500</td><td>+14.9%</td><td>−3.8pp</td><td>低</td></tr>
+      <tr><td>1,000</td><td>+12.4%</td><td>−6.3pp</td><td>中</td></tr>
+      <tr><td><strong>1,500</strong></td><td>+10.6%</td><td>−8.1pp</td><td>中（甜点区）</td></tr>
+      <tr><td><strong style="color:#16a34a;">2,000（推荐）</strong></td><td><strong>+9.3%</strong></td><td>−9.4pp</td><td>中·轻度冒险上限</td></tr>
+      <tr><td>2,500</td><td>+8.3%</td><td>−10.4pp</td><td>偏高</td></tr>
+      <tr><td>3,000</td><td>+7.4%</td><td>−11.3pp</td><td>高（边际收益递减）</td></tr>
+    </table>
+
+    <div class="reco">
+      我的建议：新增 <b>2,000 元</b>（甜点），上限 <b>2,500 元</b>，下限 <b>1,000 元</b>。<br>
+      <span class="small" style="color:#cbd5e1;">理由：2,000 把回本线压到 ~9.3%，一个月内科技/成长板块实现此涨幅的概率显著较高（8/4 创业板单日 +5%、8/5 半导体设备 +9.88% 已证反弹动能）；且总投入约 4,350，即使科技再跌 10% 绝对亏损 ≈ 570，可控、不借钱。超过 2,500 边际收益骤减而风险快速累积，违背"轻度冒险"。</span>
+    </div>
+
+    <h3>关键：新增资金"怎么投"决定回本速度</h3>
+    <div class="warnbox"><strong>新钱不是印钞机</strong>：回本速度最终取决于科技（你的老仓全在科技）反弹幅度。新钱的作用有两点——① <strong>降低回本线</strong>（数学上）；② <strong>提供低吸弹药</strong>（在科技回踩时摊低老仓成本，让同样的反弹幅度回本更快）。</div>
+    <ul>
+      <li><strong>不要一次性全投</strong>：当前 8/6 是反弹后资金出逃日（上午近 500 亿净流出），此时重仓追科技=接飞刀。新钱分多日、按你每日报的盘面动态分配。</li>
+      <li><strong>因你已有大量短债</strong>：防御弹药充足，新钱可以更敢集中于<strong>进攻</strong>（科技低吸 + 抓轮动强势板块），不必留钱买短债——这比"保守摊薄"回本更快。</li>
+      <li><strong>投向优先级</strong>：① 等科技缩量回踩低吸（补老仓成本）；② 抓轮动中相对低位、有催化的板块（医药/消费/有色细分）；③ 少量海外 QDII 分散（限购先确认）。</li>
+      <li><strong>不投</strong>：黄金（连涨高位，见手册 v2 第 5 节）、不追单日 +3% 大阳线。</li>
+    </ul>
+    <div class="pb">一句话：给 <strong>2,000 元 + 等回踩低吸 + 你已有的短债兜底</strong>，是"最短时间回本 + 轻度冒险"下的最优组合。新钱具体哪天买哪只、各多少，按你每日 15:00 前发的数据我动态下指令。</div>
+  </div>
+
+  <!-- 二、策略复检 -->
+  <div class="card">
+    <h2>二、策略复检：有什么问题？要补什么？</h2>
+
+    <h3>✅ v2 已经做对的（无需推翻）</h3>
+    <ul>
+      <li><strong>最高原则</strong>：真实资金、多向分析、本金优先——已置顶，方向正确。</li>
+      <li><strong>每日动态复盘 6 维度</strong> + 强制输出"策略是否更新"——解决了你"不能死板不动"的批评。</li>
+      <li><strong>全市场自选池</strong>——解决了"只在几只里选"的批评，可轮动操作。</li>
+      <li><strong>五情景含减仓/清仓</strong> + <strong>减仓/止盈/止损专项</strong>——解决了"看不到减仓意图"的批评。</li>
+      <li><strong>黄金专项修正</strong>——解决了"连涨追高被挂"的批评。</li>
+      <li><strong>7 天赎回费铁律</strong>——守住本金不被手续费吃掉。</li>
+    </ul>
+
+    <h3>⚠ 仍需补充的（本次补全，无原则性漏洞，但有 5 处增强）</h3>
+    <table>
+      <tr><th>#</th><th>缺口</th><th>本次补充</th></tr>
+      <tr><td>1</td><td><strong>短债外置化</strong>：之前把短债当"新买篮子"，但你已有大量持仓</td><td>手册 7 处已改为"不新购、获利回流你的大池、防御弹药充足→新钱更敢进攻"。见第三节。</td></tr>
+      <tr><td>2</td><td><strong>回本后路径缺失</strong>：回本了然后呢？容易坐过山车</td><td>新增"回本进度→降仓"闭环（见第四节）：回本 50% 减 1/3、80% 减 1/2、100% 降到 50% 仓转稳健锁利。</td></tr>
+      <tr><td>3</td><td><strong>止盈锚定不闭环</strong>：只说"反弹+15~20% 减"，没跟你的回本目标挂钩</td><td>把减仓比例与"回本进度"绑定（第四节表），反弹只是为了更快回本，不是为贪婪最后一段。</td></tr>
+      <tr><td>4</td><td><strong>QDII 实操模糊</strong>：之前 015300 暂停、改 006075，但没固化核查</td><td>明确：每日买前先在 App 确认"申购状态=开放"；买不进→并回你的短债大池，不硬追。</td></tr>
+      <tr><td>5</td><td><strong>7 天校验未固化到指令格式</strong></td><td>每次"卖/减"指令必须显式标注<strong>持有天数 + 是否过 7 天 + 赎回费</strong>，避免你误操作。</td></tr>
+      <tr><td>6</td><td><strong>单只超限历史遗留未强调</strong></td><td>重申：双创50 占 66% 是历史问题，反弹后优先降至 ≤30%（你授权可动现有基金）。</td></tr>
+    </table>
+    <div class="pb"><strong>复检结论：策略框架健全，无致命错误。</strong> 主要短板是"短债外置"和"回本后降仓路径"——已全部补全。其余为执行细节强化。</div>
+  </div>
+
+  <!-- 三、本次对 v2 的修正 -->
+  <div class="card">
+    <h2>三、本次对手册 v2 的修正清单（短债外置化）</h2>
+    <table>
+      <tr><th>位置</th><th>原表述</th><th>现表述</th></tr>
+      <tr><td>自选池·短债行</td><td>弹药+缓冲，随时待命</td><td><strong>你已有大量持仓·本策略不再新购</strong>；防御底仓+弹药，获利回流此处</td></tr>
+      <tr><td>自选池·QDII</td><td>买不进并入短债</td><td>买不进并入你的可用资金/短债大池（不新购）</td></tr>
+      <tr><td>情景·强反弹</td><td>利润转短债/红利</td><td>利润转红利或回流你的短债大池（不新购）</td></tr>
+      <tr><td>情景·缩量回调</td><td>短债不动</td><td>短债大池不动（你已有，本策略不新购）</td></tr>
+      <tr><td>情景·破位出逃</td><td>红利/短债/黄金加或持</td><td>红利/黄金加或持；短债大池为你已有防御，不动</td></tr>
+      <tr><td>减仓·止盈</td><td>利润落袋转短债/红利</td><td>利润落袋转红利或回流你的短债大池（不新购）</td></tr>
+      <tr><td>铁律</td><td>留 ≥15% 短债</td><td>你的短债大池始终保留 ≥15% 可用，不挪作满仓进攻</td></tr>
+    </table>
+  </div>
+
+  <!-- 四、回本进度→降仓闭环 -->
+  <div class="card">
+    <h2>四、新增：回本进度 → 操作 闭环规则</h2>
+    <p>把"减仓"和"你的回本目标"绑定，避免两种极端：① 反弹了还死扛不落袋；② 回本了又坐回过山车。</p>
+    <table>
+      <tr><th>账户状态</th><th>操作</th><th>理由</th></tr>
+      <tr><td>浮亏收窄至 −8%~−5%（回本 ~50%）</td><td>对反弹最强的科技减 <strong>1/3</strong>，利润转红利/回流短债大池</td><td>先锁部分利润，降低后续回撤</td></tr>
+      <tr><td>浮亏收窄至 −3%~0%（回本 ~80%）</td><td>再减 <strong>1/2 剩余科技</strong>，科技仓降至 ≤40%</td><td>回本在望，落袋为安优先</td></tr>
+      <tr><td>整体翻红（回本 100%）</td><td>科技仓降至 <strong>50%</strong>，转稳健（红利/你短债大池/少量海外），锁定胜利</td><td>不贪，避免坐过山车</td></tr>
+      <tr><td>账户收益 ≥+10%（回本后继续赚）</td><td>科技降至 40%，防御（你短债大池+红利）提至 50%+，留 10% 机动</td><td>胜利后控风险，保住利润</td></tr>
+    </table>
+    <div class="warnbox">所有"减/卖"动作先过 7 天校验；不足 7 天（赎回费 1.5%）一律不卖，改为"持有等满 7 天再减"。</div>
+  </div>
+
+  <!-- 五、给今天 8/6 的临时判断 -->
+  <div class="card">
+    <h2>五、附：今天（8/6）的临时倾向（等你发数据给正式指令）</h2>
+    <ul>
+      <li><strong>多向</strong>：空方=上午近 500 亿净流出、美联储放鹰降息预期降温；多方=ETF 7/1–8/4 净流入 4771 亿托底、成交放量。</li>
+      <li><strong>结论</strong>：反弹后高位震荡 + 资金出逃，是<strong>防守/观望日</strong>，不是重仓进攻日。</li>
+      <li><strong>临时动作</strong>：现有 3 只科技持有不追；若你确认双创50 持有 ≥7 天，今天相对高位可减 1/3 止盈（最贵 0.80% 那只先减），利润转红利或回流你短债大池；黄金不买；新增 2,000 元<strong>暂不投</strong>，等缩量回踩再低吸。</li>
+      <li><strong>策略是否更新：是</strong>——从"反弹初期持有"微调为"反弹后逢高减仓 + 防守"，因资金出逃 + 黄金避险信号显示短期过热。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>六、免责声明</h2>
+    <p class="small">本文档基于你提供的持仓截图 + 公开资讯（东方财富/Wind/券商研报/天天基金）多向推演，不构成投资建议或收益承诺。基金有风险，过往业绩不代表未来。所有操作由你自行判断执行，盈亏自负。如遇重大变化，规则动态调整，以最新沟通为准。</p>
+  </div>
+
+  <div style="text-align:center;margin:24px 0 8px;">
+    <span class="pill">每日 15:00 前发数据模板 → 收含"策略是否更新"的当日策略</span>
+  </div>
+</div>
+</body>
+</html>

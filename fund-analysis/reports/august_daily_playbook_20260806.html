@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8月每日作战手册 v2（真实资金 · 全市场 · 动态 · 含减仓）</title>
+<style>
+  :root{
+    --bg:#f0fdf4; --card:#ffffff; --ink:#14532d; --ink2:#166534;
+    --line:#bbf7d0; --accent:#16a34a; --danger:#dc2626; --warn:#d97706;
+    --blue:#1d4ed8; --gold:#ca8a04; --purple:#7c3aed;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.65;padding:28px;}
+  .wrap{max-width:960px;margin:0 auto;}
+  h1{font-size:25px;margin:0 0 4px;color:var(--ink2);}
+  .sub{color:#15803d;font-size:14px;margin-bottom:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;margin:16px 0;box-shadow:0 1px 3px rgba(22,163,74,.08);}
+  h2{font-size:18px;margin:0 0 12px;color:var(--ink2);border-left:5px solid var(--accent);padding-left:10px;}
+  h3{font-size:15px;margin:14px 0 6px;color:var(--ink2);}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+  th{background:#dcfce7;color:var(--ink2);font-weight:600;}
+  tr:nth-child(even) td{background:#f7feee;}
+  .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;}
+  .tag-buy{background:#dcfce7;color:#15803d;}
+  .tag-hold{background:#fef9c3;color:#a16207;}
+  .tag-sell{background:#fee2e2;color:#b91c1c;}
+  .tag-watch{background:#e0e7ff;color:#3730a3;}
+  .tag-update{background:#f3e8ff;color:#7c3aed;}
+  .k{color:var(--danger);font-weight:700;}
+  .ok{color:var(--accent);font-weight:700;}
+  .gold{color:var(--gold);font-weight:700;}
+  .pb{background:#ecfdf5;border-left:4px solid var(--accent);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .warnbox{background:#fffbeb;border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .dangerbox{background:#fef2f2;border-left:4px solid var(--danger);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-size:12.5px;}
+  .small{font-size:12px;color:#64748b;}
+  ul{margin:8px 0;padding-left:20px;} li{margin:4px 0;}
+  .pill{display:inline-block;background:#16a34a;color:#fff;border-radius:8px;padding:4px 12px;font-size:13px;font-weight:600;}
+  .toprule{background:#14532d;color:#fff;border-radius:12px;padding:16px 18px;margin:14px 0;font-size:15px;line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>8 月每日作战手册 v2（真实资金 · 全市场 · 动态 · 含减仓）</h1>
+  <div class="sub">建立 2026-08-06 · v2 重写：补入"最高原则、每日动态复盘、全市场自选池、减仓/止盈/止损逻辑、黄金专项修正"。目标：最短时间回本 + 轻度风险；机制：每日 15:00 前你报数据 → 我回策略</div>
+
+  <!-- 最高原则 -->
+  <div class="toprule">
+    <strong>⚠ 最高原则（凌驾一切）：这是你真实的钱，每一分都要当真。</strong><br>
+    不做敷衍、不凭感觉、不单一方向分析。每个决策必须：① 同时看多方与空方论据；② 交叉验证至少两个独立信息源；③ 想清楚"如果我是错的，最大亏损是多少、能不能承受"。策略可以激进，但<strong>本金安全永远优先于回本速度</strong>。
+  </div>
+
+  <!-- 0 边界 -->
+  <div class="card">
+    <h2>0. 运行边界（再看一遍）</h2>
+    <div class="dangerbox"><strong>我不能替你下单</strong>：账户你登，操作你点，我给指令（买/卖/清/减哪只、各多少、什么触发）。</div>
+    <div class="warnbox"><strong>我不能保证回本</strong>：浮亏约 −15.76%，回本需整体 +18.7%，这是市场的事。我的职责是把"靠运气"变成"靠纪律提高概率"。</div>
+    <ul>
+      <li><strong>场外 C 类 7 天赎回费陷阱</strong>：持有不足 7 天赎回收 <span class="k">1.5%</span>。所有"卖"动作先校验持有天数。</li>
+      <li><strong>我的实时盘中数据不保证</strong>：以你报的盘面为准，我用公开资讯交叉验证。</li>
+      <li><strong>我不是持牌投资顾问</strong>：以下为信息分析与推演，非投资建议；仅用闲钱。</li>
+    </ul>
+  </div>
+
+  <!-- 1 每日动态复盘 -->
+  <div class="card">
+    <h2>1. 每日动态复盘机制（你报数据后我必做）</h2>
+    <p>收到你的数据后，我不直接套信号表，而是先做一轮<strong>多向分析</strong>，再判断"今天要不要更新策略"。框架：</p>
+    <table>
+      <tr><th>分析维度</th><th>我看什么</th><th>多空怎么辩</th></tr>
+      <tr><td>① 当日盘面</td><td>创业板/半导体/上证涨跌、成交量（放/缩）、涨跌家数</td><td>放量涨=资金真入场；缩量涨=反抽；放量大跌=恐慌</td></tr>
+      <tr><td>② 近 5–20 日趋势</td><td>指数/板块区间涨幅、是否站上 5/20 日线</td><td>超跌反弹 vs 趋势反转，区别对待</td></tr>
+      <tr><td>③ 资金流向</td><td>主力净流入、两融、ETF 申赎、北向</td><td>钱往哪去（科技/避险/资源）？机构在买还是砍？</td></tr>
+      <tr><td>④ 板块轮动</td><td>领涨/领跌行业、高低切换节奏</td><td>不死守一个板块，谁强跟谁、谁拥挤减谁</td></tr>
+      <tr><td>⑤ 估值与拥挤度</td><td>目标板块 PE 分位、换手率、涨幅</td><td>分位&gt;90% 或单周涨&gt;15% = 危险，主动减</td></tr>
+      <tr><td>⑥ 催化与情绪</td><td>政策、业绩、外围（美利率/地缘）、恐慌/贪婪信号</td><td>利好出尽？利空计价？别在情绪极点动手</td></tr>
+    </table>
+    <div class="pb"><strong>输出结论必含一句</strong>：「<em>今日策略是否更新：是 / 否，原因___</em>」。若市场结构变了（如风格切换、出现新主线、避险升温），<span class="ok">必须主动调整</span>，不能机械沿用昨天的姿势。</div>
+  </div>
+
+  <!-- 2 全市场自选池 -->
+  <div class="card">
+    <h2>2. 全市场自选池（不再限定板块，哪强跟谁）</h2>
+    <p class="small">我是"你"，可以买任意行业/板块的场外基金（指数/ETF联接/主题基金）。下面是所有候选方向及其角色与买卖时机——<strong>轮动操作，不偏食</strong>。</p>
+    <table>
+      <tr><th>方向</th><th>角色</th><th>买点</th><th>卖/减点</th></tr>
+      <tr><td>科技成长<br>(半导体/AI/创业板/双创50)</td><td>反弹主力（高 β）</td><td>回调企稳、反弹确认信号</td><td class="k">暴涨拥挤/估值分位回 90%+ 主动减</td></tr>
+      <tr><td>医药/创新药/CRO</td><td>中期第二条主线</td><td>震荡低吸、业绩催化</td><td>短线急涨减</td></tr>
+      <tr><td>消费/白酒/食品</td><td>超跌修复、筹码干净</td><td>低位、机构回补信号</td><td>非主线，赚了就走</td></tr>
+      <tr><td>有色/资源/贵金属股</td><td>顺周期+避险联动</td><td>商品上行、美元弱</td><td class="gold">不追金价急涨</td></tr>
+      <tr><td>新能源/储能/电力设备</td><td>超跌+景气</td><td>缩量止跌、政策催化</td><td>反弹减</td></tr>
+      <tr><td>红利/银行/煤炭/公用事业</td><td>底仓+避险</td><td>市场弱、风险偏好降</td><td>市场转强时减、切成长</td></tr>
+      <tr><td>非银金融/券商</td><td>行情风向标（高贝塔）</td><td>放量突破、牛市确认</td><td>脉冲后减</td></tr>
+      <tr><td>军工/商业航天</td><td>事件+产业趋势</td><td>逢调参、订单催化</td><td>事件兑现减</td></tr>
+      <tr><td>港股/恒生科技</td><td>低估值弹性</td><td>与 A 股科技联动低吸</td><td>估值修复后减</td></tr>
+      <tr><td>美股/标普/纳指(QDII)</td><td>跨地域分散</td><td>长期定投；限购先确认</td><td>买不进并入你的可用资金/短债大池（不新购）</td></tr>
+      <tr><td class="gold">黄金/商品</td><td class="gold">避险对冲（非收益引擎）</td><td class="gold">风险事件发酵/金价回调 5–8%</td><td class="gold">连涨急涨后止盈，不追高</td></tr>
+      <tr><td>短债/货基<br><small>（你已有大量持仓 · 本策略不再新购）</small></td><td>防御底仓+弹药</td><td>随时待命（获利回流此处）</td><td>转进攻时减</td></tr>
+    </table>
+  </div>
+
+  <!-- 3 决策表 -->
+  <div class="card">
+    <h2>3. 五情景决策表（含减仓/清仓）</h2>
+    <table>
+      <tr><th>盘面信号</th><th>定级</th><th>科技/进攻操作</th><th>防御/减仓操作</th></tr>
+      <tr>
+        <td><strong>反弹确认</strong><br>连2日累+≥4%&站上5日线&放量&半导体领涨</td>
+        <td><span class="tag tag-buy">进攻</span></td>
+        <td>防御弹药转科技（东方AI→创业板增强→双创50），目标科技 60–70%</td>
+        <td>防御按比例减</td>
+      </tr>
+      <tr>
+        <td><strong>单日强反弹</strong><br>创业板 +&gt;3%</td>
+        <td><span class="tag tag-hold">不追</span></td>
+        <td>持有不追高</td>
+        <td class="k">对反弹最多的那只科技<strong>减仓 1/3 止盈</strong>，利润转红利或回流你的短债大池（不新购）</td>
+      </tr>
+      <tr>
+        <td><strong>缩量回调</strong><br>−2%~−4% 且缩量</td>
+        <td><span class="tag tag-buy">低吸</span></td>
+        <td>弹药低吸科技（分批）</td>
+        <td>短债大池不动（你已有，本策略不新购）</td>
+      </tr>
+      <tr>
+        <td><strong>破位/出逃</strong><br>单日 −5% 或放量净流出（如 8/6 上午近 500 亿出逃）</td>
+        <td><span class="tag tag-sell">防守</span></td>
+        <td class="k">停止加仓；若持仓破 20 日线+催化恶化，减至观察仓保本金</td>
+        <td>红利/黄金（避险）加或持；短债大池为你已有防御，不动</td>
+      </tr>
+      <tr>
+        <td><strong>横盘/轮动</strong><br>±1% 或快速轮动</td>
+        <td><span class="tag tag-watch">观望</span></td>
+        <td>持有；关注轮动出的新主线</td>
+        <td>防御持；准备切向走强板块</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 4 减仓止损专项 -->
+  <div class="card">
+    <h2>4. 减仓 / 止盈 / 止损 专项规则（你重点要的）</h2>
+    <div class="warnbox">之前版本只讲"买/加/持"，这是漏洞。下面是<strong>主动减仓</strong>的完整逻辑——保住本金和利润，和"回本"同等重要。</div>
+    <table>
+      <tr><th>类型</th><th>触发条件</th><th>动作</th></tr>
+      <tr><td><strong>止盈减仓</strong></td><td>单只自近期低点反弹 +15~20%，或估值分位回历史 90%+</td><td>减 1/3~1/2，利润落袋转红利或回流你的短债大池（不新购）</td></tr>
+      <tr><td><strong>拥挤减仓</strong></td><td>板块单周涨 &gt;15% 或换手率极值（参考 7 月半导体踩踏）</td><td class="k">主动减，不贪最后一段</td></tr>
+      <tr><td><strong>破位止损</strong></td><td>持仓跌破 20 日线 + 催化恶化（业绩雷/政策利空）</td><td class="k">减至观察仓或清，保本金 &gt; 等回本</td></tr>
+      <tr><td><strong>现有科技特别规则</strong></td><td>创业板反弹至前高区间（≈3600–3800）/ 半导体分位回 90%+</td><td>先减双创50（最贵 0.80%）→ 部分东方AI，落袋转防御</td></tr>
+      <tr><td><strong>目标达成减仓</strong></td><td>整体回本（−15.76% → 0%）或单月收益达标</td><td>把进攻仓降回 50%，转稳健，锁定胜利</td></tr>
+    </table>
+    <p class="small">所有"卖"动作先过 7 天持有校验；不足 7 天一律不卖（除非破位止损且持有天数已 &gt;0 且确认亏损可控）。</p>
+  </div>
+
+  <!-- 5 黄金专项 -->
+  <div class="card">
+    <h2>5. 黄金专项修正（回应你的质疑）</h2>
+    <div class="dangerbox"><strong>结论：黄金是保险，不是收益引擎；连涨后绝对不追。</strong></div>
+    <ul>
+      <li><strong>事实</strong>：8/5 现货金单日 +4.1%（2 月来最大），8/6 破 4300，近 3 日累涨 &gt;5%。根因=小非农弱→降息预期→美元跌 + 技术突破触发<strong>轧空急涨</strong>，非慢牛确认。</li>
+      <li><span class="gold">不买</span>：连涨 2–3 日、处阶段高位时（<strong>就是现在</strong>）→ 追高易被挂，若美伊协议/非农强会深度回调。</li>
+      <li><span class="ok">买点</span>：地缘/宏观风险升温（美伊生变、股市大跌、美元走强），或金价自高位回落 5–8% 后的回调。</li>
+      <li><span class="gold">卖点</span>：急涨后（如单日 +4% 且阶段高位）→ 已持有可减 1/3 止盈；风险解除（协议达成、数据强）→ 溢价消退，减。</li>
+      <li>仓位：仅作 3–5% 对冲，不超配；与科技负相关的"保险"价值 &gt; 投机价值。</li>
+    </ul>
+  </div>
+
+  <!-- 6 数据模板 -->
+  <div class="card">
+    <h2>6. 你每天发我的数据（升级版）</h2>
+    <div style="background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;white-space:pre-wrap;">
+日期：8月6日
+盘面：创业板指 __% ，半导体 __% ，上证 __% ，成交量 __亿（放/缩）
+资金/情绪：主力净流__ / 两融 __ / 北向 __ （或写"出逃/回流"）
+板块强弱：领涨__ ，领跌__
+持仓（每只写当日% + 市值 + 持有天数）：
+- 东方AI（017811）：当日 __% ，市值 __ 元，持有 __ 天
+- 天弘创业板增强C：当日 __% ，市值 __ 元，持有 __ 天
+- 天弘双创50联接C（012895）：当日 __% ，市值 __ 元，持有 __ 天
+可用新资金：__ 元（可选）
+备注：__</div>
+  </div>
+
+  <!-- 7 回复格式 -->
+  <div class="card">
+    <h2>7. 我的回复格式（含"策略是否更新"）</h2>
+    <table>
+      <tr><th>项目</th><th>内容</th></tr>
+      <tr><td>多向盘面判断</td><td>多方/空方论据 + 我的结论</td></tr>
+      <tr><td>今日定级</td><td>进攻/不追/低吸/防守/观望</td></tr>
+      <tr><td><span class="tag tag-update">策略是否更新</span></td><td><strong>是/否 + 原因</strong>（市场结构变了就调）</td></tr>
+      <tr><td>逐只操作</td><td>买/持/<span class="tag tag-sell">卖·减·清</span> + 金额 + 触发 + 理由（含 7 天校验）</td></tr>
+      <tr><td>跨板块动作</td><td>是否切到新主线/避险（如今天切红利、减科技）</td></tr>
+      <tr><td>明日观察</td><td>重点信号</td></tr>
+    </table>
+  </div>
+
+  <!-- 8 铁律 -->
+  <div class="card">
+    <h2>8. 铁律</h2>
+    <ul>
+      <li><span class="k">不满 7 天不卖 8 月新买入的 C 类</span>（1.5% 赎回费）；<strong>你的现有 3 只基金均已过手续费期，卖出无摩擦，可自由减/清</strong>，不受此条限制。</li>
+      <li><span class="k">不追单日 +3% 大阳线</span>，场外按当日 NAV，追高接飞刀。</li>
+      <li><span class="k">不借钱、不加杠杆</span>，只用闲钱。</li>
+      <li><span class="gold">黄金连涨不追、急涨可止盈</span>。</li>
+      <li><span class="ok">减仓和加仓一样重要</span>：暴涨拥挤主动减、破位果断减，保本金优先。</li>
+      <li><span class="ok">每个决策想"错了怎么办"</span>：最大亏损、能否承受，再下单。</li>
+      <li>QDII 限购先确认；反弹确认前防御弹药只减不空（你的短债大池始终保留 ≥15% 可用，不挪作满仓进攻）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>9. 免责声明</h2>
+    <p class="small">本手册基于公开资讯与历史数据多向推演，不构成投资建议或收益承诺。基金有风险，过往业绩不代表未来。所有操作由你自行判断执行，盈亏自负。如遇重大变化，规则动态调整，以最新沟通为准。</p>
+  </div>
+
+  <div style="text-align:center;margin:24px 0 8px;">
+    <span class="pill">每日 15:00 前发第 6 节模板 → 收含"策略是否更新"的当日策略</span>
+  </div>
+</div>
+</body>
+</html>
