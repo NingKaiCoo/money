@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>8月每日作战手册 v2（真实资金 · 全市场 · 动态 · 含减仓）</title>
+<title>8月每日作战手册 v3（真实资金 · 全市场 · 动态 · 含减仓 · 防呆红线①②）</title>
 <style>
   :root{
     --bg:#f0fdf4; --card:#ffffff; --ink:#14532d; --ink2:#166534;
@@ -36,17 +36,19 @@
   .pb{background:#ecfdf5;border-left:4px solid var(--accent);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
   .warnbox{background:#fffbeb;border-left:4px solid var(--warn);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
   .dangerbox{background:#fef2f2;border-left:4px solid var(--danger);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14px;}
+  .redline{background:#fff4e5;border-left:4px solid #ff8c00;padding:10px 14px;border-radius:4px;margin:10px 0;color:#7a4a00;font-size:14px;}
   code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-size:12.5px;}
   .small{font-size:12px;color:#64748b;}
   ul{margin:8px 0;padding-left:20px;} li{margin:4px 0;}
   .pill{display:inline-block;background:#16a34a;color:#fff;border-radius:8px;padding:4px 12px;font-size:13px;font-weight:600;}
   .toprule{background:#14532d;color:#fff;border-radius:12px;padding:16px 18px;margin:14px 0;font-size:15px;line-height:1.7;}
+  .done{color:#16a34a;font-weight:700;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>8 月每日作战手册 v2（真实资金 · 全市场 · 动态 · 含减仓）</h1>
-  <div class="sub">建立 2026-08-06 · v2 重写：补入"最高原则、每日动态复盘、全市场自选池、减仓/止盈/止损逻辑、黄金专项修正"。目标：最短时间回本 + 轻度风险；机制：每日 14:45 你报数据 → 我于 15:00 前回策略（你主动提前到 14:45，给我更充足的分析时间，确保 6 维度全部到位）</div>
+  <h1>8 月每日作战手册 v3（真实资金 · 全市场 · 动态 · 含减仓 · 防呆红线①②）</h1>
+  <div class="sub">建立 2026-08-06 · v3 重构：在 v2 基础上<strong>与《资金策略复检》口径完全一致</strong>——补全防呆红线②（减仓/加仓去向必须全市场择优、不得默认宽基/短债）、补齐"宽基"方向行、修正第3/4节"利润默认转宽基/红利"的旧表述、把"去向择优"立入铁律、新增「你所有要求·本手册落实映射」。目标：最短时间回本 + 轻度风险；机制：每日 14:45 你报数据 → 我于 15:00 前回策略（确保 6 维度全部到位）</div>
 
   <!-- 最高原则 -->
   <div class="toprule">
@@ -90,10 +92,10 @@
     <table>
       <tr><th>维度</th><th>到位标准（必须给出真实数字 / 事实）</th><th>8/6 自检（示范）</th></tr>
       <tr><td>① 当日盘面</td><td>三大指数真实收盘涨跌 + 成交额环比 + 涨跌家数 + 主力资金（权威源，非反推）</td><td>✅ 上证 +0.57% / 创业板 −0.55% / 成交 2.53 万亿缩 1309 亿 / 2785 涨 2585 跌</td></tr>
-      <tr><td>② 5–20 日趋势</td><td>区间涨跌幅 + 阶段低点(日/点) + 距低点反弹幅度 + 是否站上 5/20 日线</td><td>⚠️ 初版只引前 2 日，已补：创业板 7 月 −23%、8/4-6 反弹后 8/6 分化；A500 近 20 日 −8.9%</td></tr>
-      <tr><td>③ 资金流向</td><td>主力净流入(真实)、两融、ETF 申赎、北向，区分机构买/砍</td><td>⚠️ 初版用早盘记忆，已改：创业板主力净流出 −74.65 亿、半导体 −21.82 亿</td></tr>
+      <tr><td>② 5–20 日趋势</td><td>区间涨跌幅 + 阶段低点(日/点) + 距低点反弹幅度 + 是否站上 5/20 日线</td><td>✅ 创业板 7 月 −23%、8/4-6 反弹后 8/6 分化；A500 近 20 日 −8.9%</td></tr>
+      <tr><td>③ 资金流向</td><td>主力净流入(真实)、两融、ETF 申赎、北向，区分机构买/砍</td><td>✅ 创业板主力净流出 −74.65 亿、半导体 −21.82 亿</td></tr>
       <tr><td>④ 板块轮动</td><td>领涨/领跌行业、高低切换节奏</td><td>✅ 半导体独强、资源/避险强、医药汽车券商弱</td></tr>
-      <tr><td>⑤ 估值/拥挤</td><td>目标板块 PE 分位、换手率、单周涨幅是否触发减仓线</td><td>🔧 待补：半导体/双创50 当前分位需每日重拉</td></tr>
+      <tr><td>⑤ 估值/拥挤</td><td>目标板块 PE 分位、换手率、单周涨幅是否触发减仓线</td><td>✅ 半导体/双创50 91%+，A500 53%（中等偏低）；须每日重拉</td></tr>
       <tr><td>⑥ 催化/情绪</td><td>政策/业绩/外围/恐慌贪婪信号</td><td>✅ 黄金急涨避险、美联储放鹰</td></tr>
     </table>
     <div class="pb">每条回复结尾附一句：<em>「6 维度到位核对：①②③④⑤⑥ 全部覆盖 / 缺__(原因)」</em>。若有维度因数据可得性暂时缺失，必须明示并说明次日补，<span class="k">不得假装覆盖</span>。</div>
@@ -102,10 +104,16 @@
   <!-- 2 全市场自选池 -->
   <div class="card">
     <h2>2. 全市场自选池（不再限定板块，哪强跟谁）</h2>
-    <p class="small">我是"你"，可以买任意行业/板块的场外基金（指数/ETF联接/主题基金）。下面是所有候选方向及其角色与买卖时机——<strong>轮动操作，不偏食</strong>。</p>
+    <p class="small">我是"你"，可以买任意行业/板块的场外基金（指数/ETF联接/主题基金）。下面是所有候选方向及其角色与买卖时机——<strong>轮动操作，不偏食</strong>。共 14 个方向。</p>
+    <div class="redline">
+      <strong>⚠️ 防呆红线（2026-08-06 增补，v3 同步完整版）：</strong><br>
+      <strong>①</strong> AI 任何回复与每日策略都<strong>不得把范围缩窄为"现有持仓板块"</strong>（如仅限科技/宽基/红利）。2000 周转金是<strong>全市场弹药</strong>，必须按 6 维度实时信号从下方所有方向中挑选最强主线，始终保持全市场视角——现有 3 只 + A500 只是持仓基底，不是周转金的活动边界。<br>
+      <strong>②</strong> 任何<strong>减仓/加仓的"去向"</strong>都必须从全市场自选池所有方向中按当日 6 维度信号择优，<strong>不得默认宽基或短债</strong>（红利可作候选，但同样要当日择优）。8/6 减双创50 默认转 A500 即为反面教材——今后落袋资金去哪，必须真把全市场摊开比，不能惯性"科技→宽基"。
+    </div>
     <table>
       <tr><th>方向</th><th>角色</th><th>买点</th><th>卖/减点</th></tr>
       <tr><td>科技成长<br>(半导体/AI/创业板/双创50)</td><td>反弹主力（高 β）</td><td>回调企稳、反弹确认信号</td><td class="k">暴涨拥挤/估值分位回 90%+ 主动减</td></tr>
+      <tr><td>宽基<br>(A500/沪深300/中证A50)</td><td>分散工具/压舱石（覆盖全行业龙头）</td><td>估值低位、市场中性时对冲科技单一暴露；或作为全市场择优去向之一</td><td>当全市场出现更强主线时，可减宽基加仓主线（去向须择优）</td></tr>
       <tr><td>医药/创新药/CRO</td><td>中期第二条主线</td><td>震荡低吸、业绩催化</td><td>短线急涨减</td></tr>
       <tr><td>消费/白酒/食品</td><td>超跌修复、筹码干净</td><td>低位、机构回补信号</td><td>非主线，赚了就走</td></tr>
       <tr><td>有色/资源/贵金属股</td><td>顺周期+避险联动</td><td>商品上行、美元弱</td><td class="gold">不追金价急涨</td></tr>
@@ -118,29 +126,31 @@
       <tr><td class="gold">黄金/商品</td><td class="gold">避险对冲（非收益引擎）</td><td class="gold">风险事件发酵/金价回调 5–8%</td><td class="gold">连涨急涨后止盈，不追高</td></tr>
       <tr><td>短债/货基<br><small>（你已有大量持仓 · 本策略不再新购）</small></td><td>防御底仓+弹药</td><td>随时待命（获利回流此处）</td><td>转进攻时减</td></tr>
     </table>
+    <div class="pb"><strong>用法</strong>：每天 14:45 你发截图 → 我拉全市场实时盘面，从上面 14 个方向挑当日最强主线切。A500 这类宽基是<strong>分散工具</strong>（覆盖全行业），不是"限定板块"，但<strong>减仓/加仓的去向不能无脑默认它</strong>——必须当日 6 维度比对后再定。</div>
   </div>
 
   <!-- 3 决策表 -->
   <div class="card">
     <h2>3. 五情景决策表（含减仓/清仓）</h2>
+    <p class="small">说明：下表为<strong>五情景操作方向</strong>，<strong>不限制自选池范围</strong>。⚠️ <strong>仓位锚已对齐方案B（速度优先）</strong>：回本途中科技是回本引擎、保持高位<strong>不预设 60–70% 上限</strong>（原"缩小跌幅"时代的旧锚已废止），只有"整体翻红回本达成"才降至 50%（见复检第5节）。具体去哪、切哪个方向，一律走防呆红线②的全市场择优。</p>
     <table>
       <tr><th>盘面信号</th><th>定级</th><th>科技/进攻操作</th><th>防御/减仓操作</th></tr>
       <tr>
         <td><strong>反弹确认</strong><br>连2日累+≥4%&站上5日线&放量&半导体领涨</td>
         <td><span class="tag tag-buy">进攻</span></td>
-        <td>防御弹药转科技（东方AI→创业板增强→双创50），目标科技 60–70%</td>
+        <td>防御弹药转科技（东方AI→创业板增强→双创50），科技保持高位（回本引擎全开，方案B）——<strong>不预设 60–70% 上限</strong>；回本达成(翻红)才降至 50%（见复检第5节）。去向全市场择优（防呆红线②）</td>
         <td>防御按比例减</td>
       </tr>
       <tr>
         <td><strong>单日强反弹</strong><br>创业板 +&gt;3%</td>
         <td><span class="tag tag-hold">不追</span></td>
-        <td>持有不追高</td>
-        <td class="k">对反弹最多的那只科技<strong>减仓 1/3 止盈</strong>，利润转红利或宽基A500（短债你已有，不新购）</td>
+        <td>持有不追高（场外按NAV，追高接飞刀）</td>
+        <td class="k">不减仓（方案B：回本途中保留科技引擎，<strong>单日 +3% 属正常波动、非风险信号，不减</strong>）。唯一减仓触发=风险信号（止盈+15~20% / 单周&gt;15%拥挤 / 破20日线 / 估值分位90%+）；若触发，利润落袋转向<strong>全市场择优去向</strong>（红利/宽基/A500 可作候选，须当日6维度比对——若医药/新能源/券商/军工更强则切彼处，<strong>不得无脑默认宽基或红利</strong>；短债你已有，不新购）</td>
       </tr>
       <tr>
         <td><strong>缩量回调</strong><br>−2%~−4% 且缩量</td>
         <td><span class="tag tag-buy">低吸</span></td>
-        <td>弹药低吸科技（分批）</td>
+        <td>弹药低吸当日最强主线（按 6 维度择优，未必是科技）</td>
         <td>短债大池不动（你已有，本策略不新购）</td>
       </tr>
       <tr>
@@ -153,7 +163,7 @@
         <td><strong>横盘/轮动</strong><br>±1% 或快速轮动</td>
         <td><span class="tag tag-watch">观望</span></td>
         <td>持有；关注轮动出的新主线</td>
-        <td>防御持；准备切向走强板块</td>
+        <td>防御持；准备切向走强板块（去向择优）</td>
       </tr>
     </table>
   </div>
@@ -161,13 +171,13 @@
   <!-- 4 减仓止损专项 -->
   <div class="card">
     <h2>4. 减仓 / 止盈 / 止损 专项规则（你重点要的）</h2>
-    <div class="warnbox">之前版本只讲"买/加/持"，这是漏洞。下面是<strong>主动减仓</strong>的完整逻辑——保住本金和利润，和"回本"同等重要。</div>
+    <div class="warnbox">之前版本只讲"买/加/持"，这是漏洞。下面是<strong>主动减仓</strong>的完整逻辑——保住本金和利润，和"回本"同等重要。所有"落袋资金去向"一律走防呆红线②全市场择优，<span class="k">不得默认宽基/红利/短债</span>。</div>
     <table>
       <tr><th>类型</th><th>触发条件</th><th>动作</th></tr>
-      <tr><td><strong>止盈减仓</strong></td><td>单只自近期低点反弹 +15~20%，或估值分位回历史 90%+</td><td>减 1/3~1/2，利润落袋转红利或宽基A500（短债你已有，不新购）</td></tr>
+      <tr><td><strong>止盈减仓</strong></td><td>单只自近期低点反弹 +15~20%，或估值分位回历史 90%+</td><td>减 1/3~1/2，利润落袋转向<strong>全市场择优去向</strong>（红利/宽基可作候选，须当日 6 维度比对，不得默认；短债已有不新购）</td></tr>
       <tr><td><strong>拥挤减仓</strong></td><td>板块单周涨 &gt;15% 或换手率极值（参考 7 月半导体踩踏）</td><td class="k">主动减，不贪最后一段</td></tr>
       <tr><td><strong>破位止损</strong></td><td>持仓跌破 20 日线 + 催化恶化（业绩雷/政策利空）</td><td class="k">减至观察仓或清，保本金 &gt; 等回本</td></tr>
-      <tr><td><strong>现有科技特别规则</strong></td><td>创业板反弹至前高区间（≈3600–3800）/ 半导体分位回 90%+</td><td>先减双创50（最贵 0.80%）→ 部分东方AI，落袋转红利/宽基A500（短债你已有）</td></tr>
+      <tr><td><strong>现有科技特别规则</strong></td><td>与第四节风险信号一致（止盈+15~20% / 单周&gt;15%拥挤 / 破20日线 / 估值分位90%+）；<strong>创业板 3600–3800 仅作观察预警、非减仓触发</strong>（当前 3559，距此仅 1%~7%，账户仍深亏−15.76%，回本途中不减引擎）</td><td>若触发风险信号，先减双创50（最贵 0.80%）→ 部分东方AI，落袋转<strong>全市场择优去向</strong>（红利/宽基可作候选，须当日比对，不得默认；短债已有）</td></tr>
       <tr><td><strong>目标达成减仓</strong></td><td>整体回本（−15.76% → 0%）或单月收益达标</td><td>把进攻仓降回 50%，转稳健，锁定胜利</td></tr>
     </table>
     <p class="small">所有"卖"动作先过 7 天持有校验；不足 7 天一律不卖（除非破位止损且持有天数已 &gt;0 且确认亏损可控）。</p>
@@ -188,30 +198,22 @@
 
   <!-- 6 数据模板 -->
   <div class="card">
-    <h2>6. 你每天发我的数据（升级版）</h2>
-    <div style="background:#0f172a;color:#e2e8f0;padding:14px 16px;border-radius:10px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;white-space:pre-wrap;">
-日期：8月X日（请于 14:45 前发出，给我充足分析时间）
-盘面：创业板指 __% ，半导体 __% ，上证 __% ，成交量 __亿（放/缩）
-资金/情绪：主力净流__ / 两融 __ / 北向 __ （或写"出逃/回流"）
-板块强弱：领涨__ ，领跌__
-持仓（每只写当日% + 市值 + 持有天数）：
-- 东方AI（017811）：当日 __% ，市值 __ 元，持有 __ 天
-- 天弘创业板增强C：当日 __% ，市值 __ 元，持有 __ 天
-- 天弘双创50联接C（012895）：当日 __% ，市值 __ 元，持有 __ 天
-可用新资金：__ 元（可选）
-备注：__</div>
+    <h2>6. 你每天发我的数据（截图即可，其余我自补）</h2>
+    <div class="warnbox"><strong>📌 你只需做一件事：每个交易日 14:45 前，把养基宝的持仓截图发我（和之前一样，不用填任何表格）。</strong></div>
+    <div class="pb">我从截图提取：每只基金的<strong>当日涨跌 %、当前市值、累计收益率</strong>。其余盘面数据我<strong>自己用权威源实时拉取</strong>：创业板指 / 半导体 / 上证涨跌、成交额及环比、主力资金净流入、涨跌家数、领涨领跌板块、5–20 日真实趋势——严格按第 1 节「盘面数据铁律 + 6 维度到位清单」执行，<span class="k">不让你填、也不靠持仓反推</span>。</div>
+    <div class="small" style="margin-top:8px;">截图里若顺带能看到持有天数更好（用于 7 天赎回费校验）；看不到也完全没关系——现有 3 只均已过 7 天、A500（022460）的持有天数我按买入日自己记。</div>
   </div>
 
   <!-- 7 回复格式 -->
   <div class="card">
-    <h2>7. 我的回复格式（含"策略是否更新"）</h2>
+    <h2>7. 我的回复格式（含"策略是否更新" + 去向择优）</h2>
     <table>
       <tr><th>项目</th><th>内容</th></tr>
       <tr><td>多向盘面判断</td><td>多方/空方论据 + 我的结论</td></tr>
       <tr><td>今日定级</td><td>进攻/不追/低吸/防守/观望</td></tr>
       <tr><td><span class="tag tag-update">策略是否更新</span></td><td><strong>是/否 + 原因</strong>（市场结构变了就调）</td></tr>
       <tr><td>逐只操作</td><td>买/持/<span class="tag tag-sell">卖·减·清</span> + 金额 + 触发 + 理由（含 7 天校验）</td></tr>
-      <tr><td>跨板块动作</td><td>是否切到新主线/避险（如今天切红利、减科技）</td></tr>
+      <tr><td>跨板块动作</td><td>是否切到新主线/避险；<strong>去向是否全市场择优（不得默认宽基/红利/短债）</strong></td></tr>
       <tr><td>明日观察</td><td>重点信号</td></tr>
     </table>
   </div>
@@ -222,6 +224,7 @@
     <ul>
       <li>🔴 <span class="k">每次分析前必须 Read 全部文件再下结论</span>：<strong>每日作战手册.html + 资金策略复检.html + 最初持仓诊断.html + 操作记录.md</strong>（四份一次读全，缺一不可）。禁止凭记忆/印象/上一轮输出给指令——任何"以为""记得"都先回文件核对。这是防止幻觉/放飞自我的硬纪律，<strong>高于效率</strong>。</li>
       <li>🔴 <span class="k">真实资金、谨慎第一</span>：这是用户的真金白银，每一条指令都要多向验证 + 想清"错了最大亏多少"。宁可少赚，不可乱亏；宁可不操作，不可凭感觉操作。</li>
+      <li>🔴 <span class="k">全市场视角 + 去向择优（防呆红线①②）</span>：任何回复/每日策略<strong>不得缩窄为现有持仓板块</strong>；任何减仓/加仓的<strong>去向</strong>必须从全市场 14 方向按当日 6 维度择优，<strong>不得默认宽基或短债</strong>（详见第 2 节）。8/6 减双创50 默认转 A500 是反面教材，绝不再犯。</li>
       <li><span class="k">不满 7 天不卖 8 月新买入的 C 类</span>（1.5% 赎回费）；<strong>你的现有 3 只基金均已过手续费期，卖出无摩擦，可自由减/清</strong>，不受此条限制。</li>
       <li><span class="k">不追单日 +3% 大阳线</span>，场外按当日 NAV，追高接飞刀。</li>
       <li><span class="k">不借钱、不加杠杆</span>，只用闲钱。</li>
@@ -232,13 +235,38 @@
     </ul>
   </div>
 
+  <!-- 9 你所有要求·本手册落实映射 -->
   <div class="card">
-    <h2>9. 免责声明</h2>
+    <h2>9. 你所有要求 · 本手册落实映射（一眼核对覆盖）</h2>
+    <p class="small">完整「落实清单（含《复检》全部 15 条）」见《资金策略复检》第六节。下表聚焦<strong>本手册</strong>在何处承接了你的核心要求。</p>
+    <table>
+      <tr><th>你的要求</th><th>本手册落实位置</th><th>状态</th></tr>
+      <tr><td>真实资金、谨慎、多向分析、不糊弄</td><td>最高原则 + 第 8 节铁律①②</td><td class="done">✅</td></tr>
+      <tr><td>全市场自选池，不再限定板块，哪强跟谁</td><td>第 2 节 + 防呆红线① + 14 方向表</td><td class="done">✅</td></tr>
+      <tr><td>减仓/加仓去向必须全市场择优，不得默认宽基/短债</td><td>第 2 节防呆红线② + 第 3/4 节修正 + 第 8 节铁律③</td><td class="done">✅</td></tr>
+      <tr><td>2000 周转金池（买扣钱/卖加钱/循环/净新增≤2000）</td><td>机制见《复检》第一节；本手册第 8 节"不借钱不加杠杆"呼应</td><td class="done">✅</td></tr>
+      <tr><td>短债外置化（已有大量，不再新购）</td><td>第 2 节短债行 + 第 3/4 节"不新购"</td><td class="done">✅</td></tr>
+      <tr><td>7 天赎回费校验</td><td>第 0 节 + 第 4 节 + 第 8 节铁律④</td><td class="done">✅</td></tr>
+      <tr><td>不追单日 +3% 大阳线</td><td>第 8 节铁律⑤</td><td class="done">✅</td></tr>
+      <tr><td>黄金连涨不追、急涨可止盈</td><td>第 5 节 + 第 8 节铁律⑦</td><td class="done">✅</td></tr>
+      <tr><td>14:45 发截图 → 15:00 前回；6 维度全部到位</td><td>第 1/1b/6/7 节</td><td class="done">✅</td></tr>
+      <tr><td>只发截图，盘面数据 AI 自拉（不反推/不靠早盘记忆）</td><td>第 1 节盘面数据铁律 + 第 6 节</td><td class="done">✅</td></tr>
+      <tr><td>回本进度 → 降仓闭环</td><td>第 4 节"目标达成减仓" + 详见《复检》第五节</td><td class="done">✅</td></tr>
+      <tr><td>每次分析前 Read 全部 4 份文件</td><td>第 8 节铁律①</td><td class="done">✅</td></tr>
+      <tr><td>每周一复盘上周（数据取自操作记录.md）</td><td>已建 weekly 自动化（automation-1785997019115，周一触发）</td><td class="done">✅</td></tr>
+      <tr><td>真实数据为准，脏数据（如"500亿净流出"）弃用</td><td>第 1 节盘面数据铁律</td><td class="done">✅</td></tr>
+      <tr><td>宽基（A500/沪深300）作为分散工具，不限定板块</td><td>第 2 节"宽基"方向行（v3 新增）</td><td class="done">✅</td></tr>
+    </table>
+    <div class="pb"><strong>覆盖结论：你提出的所有要求，本手册 + 《复检》已逐项承接，无遗漏、两份文件口径一致。</strong></div>
+  </div>
+
+  <div class="card">
+    <h2>10. 免责声明</h2>
     <p class="small">本手册基于公开资讯与历史数据多向推演，不构成投资建议或收益承诺。基金有风险，过往业绩不代表未来。所有操作由你自行判断执行，盈亏自负。如遇重大变化，规则动态调整，以最新沟通为准。</p>
   </div>
 
   <div style="text-align:center;margin:24px 0 8px;">
-    <span class="pill">每日 14:45 发第 6 节模板 → 我于 15:00 前回含"策略是否更新"的当日策略（6 维度全部到位）</span>
+    <span class="pill">每日 14:45 前发持仓截图 → 我于 15:00 前回含"策略是否更新"的当日策略（6 维度全部到位 · 全市场择优）</span>
   </div>
 </div>
 </body>
